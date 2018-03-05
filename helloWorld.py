@@ -22,7 +22,7 @@ class HelloWorld():
         api = tweepy.API(auth)
 
         # The search term you want to find
-        query = "Donald Trump"
+        query = "Microsoft"
         # Language code (follows ISO 639-1 standards)
         language = "en"
 
@@ -47,9 +47,10 @@ class HelloWorld():
         s1 = pd.Series(tweetsArray)
         s2 = pd.Series(locationArray)
         s3 = pd.Series(screenNameArray)
-        df = pd.join(s1, s2)
+        df = pd.concat([s1, s2, s3], axis=1)
+        print(df)
         #print(df.head)   
-        df.to_csv('tweetsCSV2.csv', sep='\t', encoding='utf-8', index=False)    
+        df.to_csv('Microsoft.csv', sep='\t', encoding='utf-8', index=False)    
 test = HelloWorld()
 test.getTweets()
     
