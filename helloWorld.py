@@ -2,6 +2,9 @@
 import tweepy
 #Pandas for DataFrame Objects
 import pandas as pd  
+import matplotlib.pyplot as plt
+import textblob as tb 
+
 
 # API KEYS 
 consumer_key = "yLjjxhLqUrp4181CRpF87XsrA"
@@ -18,7 +21,8 @@ api = tweepy.API(auth)
 
 class HelloWorld():
     def __init__(self):
-       pass
+       self.tweet =[]
+       self.tweetText =[]
 
     
     def getTweets(self):
@@ -33,37 +37,49 @@ class HelloWorld():
         results = api.search(q=query, lang=language)
 
         # Create arrays to store 1) Tweet,  2) Location, 3) Screen Name
-        # All other things like Date + Time, Media, ect, will be added later once script is better. 
+        # All other things like Date + Time, Media, ect, will be added later 
 
         self.tweetsArray = []
         self.locationArray = []
         self.screenNameArray = []
-
+        self.sentimentArray = []
+        
         # foreach through all tweets pulled
         for tweet in results:
         # printing the text stored inside the tweet object
         #print(tweet.user.screen_name,"Tweeted:",tweet.text, "Location:", tweet.user.location)
-
            self.tweetsArray.append(tweet.text)
            self.locationArray.append(tweet.user.location)
            self.screenNameArray.append(tweet.user.screen_name)
+           self.sentimentArray.append()
+        #    self.sentimentArray.append()
       
-            
+    def getSentiment(self):
+       
+        positive = 0
+        negative = 0
+        neutral = 0
+        polarity = 0
+
+        for tweets in results:
+            analysis = textblob(tweets.text)
+            polarity += analysis.sentiment.polarity
+
+            if(analysis.sentiment.polarity == 0):
+                neutral += 1
+            elif(analysis.sentiment.polarity < 0.00):
+                negative += 1
+            elif(analysis.sentiment.polarity > 0.00):
+                positive += 1
+
+    def percentage(self, part, whole):
+        
+        return 100 * (float(part) / float(whole))
     
-    def addToArray(self):    
+    
 
-        # Creating Series to add to data frame
-        s1 = pd.Series(self.tweetsArray)
-        s2 = pd.Series(self.locationArray)
-        s3 = pd.Series(self.screenNameArray)
 
-        #Creating Data Frame
-        df = pd.concat([s1, s2, s3], axis=1)
-        print(df)
-
-        # Adding to CSV File for now. 
-        # Should have another method that adds to NoSQL Database 
-        df.to_csv('Microsoft2.csv', sep='\t', encoding='utf-8', index=False)    
+       
 
 #_-----------------------------------------------------------------------------------------x-----------------------------------------------------------------------_#
 
