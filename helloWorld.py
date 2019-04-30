@@ -7,10 +7,10 @@ import textblob as tb
 
 
 # API KEYS 
-consumer_key = "yLjjxhLqUrp4181CRpF87XsrA"
-consumer_secret = "uO9jXZcCJ1eRPHnVLA1eWf9U5hqC3NLH5PPwQvuWDrC2kvGcnE"
-access_token = "2840569633-ve68zs1gAnS2qrwS3PVHYcPxgYCLV8oRdfoovDj"
-access_token_secret = "nGK44QaP89jSLAC7TEvgPEXQXNgRSTpWZvZDG7dhsdFV3"
+consumer_key = "[Placeholder]"
+consumer_secret = "[Placeholder]"
+access_token = "[Placeholder]"
+access_token_secret = "[Placeholder]"
 
 # Creating the authentication object
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
